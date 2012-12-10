@@ -26,12 +26,12 @@ public abstract class AbstractDialog
 	private String buttonCancel = "Cancel";
 	
 	
-	protected AbstractDialog(DialogStyle style, Player player, Shoebill shoebill, EventManager eventManager)
+	protected AbstractDialog(DialogStyle style, Player player, Shoebill shoebill, EventManager rootEventManager)
 	{
 		this.style = style;
 		this.shoebill = shoebill;
 		this.player = player;
-		this.eventManager = new ManagedEventManager(eventManager);
+		this.eventManager = new ManagedEventManager(rootEventManager);
 		
 		SampObjectFactory factory = shoebill.getSampObjectFactory();
 		dialog = factory.createDialog();
