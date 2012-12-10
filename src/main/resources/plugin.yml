@@ -1,0 +1,7 @@
+class: net.gtaun.shoebill.example.vm.VehicleManagerPlugin
+name: Vehicle Manager Plugin
+version: 0.1.0-SNAPSHOT
+buildNumber: 0
+buildDate: Unknown
+authors: MK124
+description: 
