@@ -15,6 +15,7 @@ import net.gtaun.shoebill.example.vm.dialog.VehicleManagerDialog;
 import net.gtaun.shoebill.object.Player;
 import net.gtaun.shoebill.resource.Plugin;
 import net.gtaun.util.event.EventManager;
+import net.gtaun.util.event.ManagedEventManager;
 import net.gtaun.util.event.EventManager.HandlerEntry;
 import net.gtaun.util.event.EventManager.HandlerPriority;
 
@@ -22,24 +23,22 @@ import net.gtaun.util.event.EventManager.HandlerPriority;
 public class PlayerManager
 {
 	private Shoebill shoebill;
-	private EventManager eventManager;
-	private Collection<HandlerEntry> eventHandlerEntries;
+	private ManagedEventManager eventManager;
 	
 	
-	public PlayerManager(Shoebill shoebill, EventManager eventManager)
+	public PlayerManager(Shoebill shoebill, EventManager rootEventManager)
 	{
 		this.shoebill = shoebill;
-		this.eventManager = eventManager;
-		this.eventHandlerEntries = new LinkedList<>();
+		this.eventManager = new ManagedEventManager(rootEventManager);
 
-		eventHandlerEntries.add(eventManager.addHandler(PlayerConnectEvent.class, playerEventHandler, HandlerPriority.NORMAL));
-		eventHandlerEntries.add(eventManager.addHandler(PlayerDisconnectEvent.class, playerEventHandler, HandlerPriority.NORMAL));
-		eventHandlerEntries.add(eventManager.addHandler(PlayerCommandEvent.class, playerEventHandler, HandlerPriority.NORMAL));
+		eventManager.registerHandler(PlayerConnectEvent.class, playerEventHandler, HandlerPriority.NORMAL);
+		eventManager.registerHandler(PlayerDisconnectEvent.class, playerEventHandler, HandlerPriority.NORMAL);
+		eventManager.registerHandler(PlayerCommandEvent.class, playerEventHandler, HandlerPriority.NORMAL);
 	}
 	
 	public void uninitialize()
 	{
-		for (HandlerEntry entry : eventHandlerEntries) entry.cancel();
+		eventManager.cancelAll();
 	}
 	
 	private PlayerEventHandler playerEventHandler = new PlayerEventHandler()
