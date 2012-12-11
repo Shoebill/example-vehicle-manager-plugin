@@ -43,7 +43,8 @@ public class VehicleListDialog extends AbstractPageListDialog
 				@Override
 				public void onItemSelect()
 				{
-					new VehicleDialog(vehicle, player, shoebill, eventManager).show();
+					new VehicleDialog(vehicle, player, shoebill, rootEventManager).show();
+					destroy();
 				}
 			});
 		}

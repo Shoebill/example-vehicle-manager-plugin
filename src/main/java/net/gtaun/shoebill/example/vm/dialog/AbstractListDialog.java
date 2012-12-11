@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.gtaun.shoebill.Shoebill;
 import net.gtaun.shoebill.constant.DialogStyle;
-import net.gtaun.shoebill.event.dialog.DialogCancelEvent;
 import net.gtaun.shoebill.event.dialog.DialogResponseEvent;
 import net.gtaun.shoebill.object.Player;
 import net.gtaun.util.event.EventManager;
@@ -71,11 +70,9 @@ public abstract class AbstractListDialog extends AbstractDialog
 			
 			item.onItemSelect();
 		}
-	}
-	
-	@Override
-	protected void onDialogCancel(DialogCancelEvent event)
-	{
-		
+		else
+		{
+			destroy();
+		}
 	}
 }

@@ -35,7 +35,8 @@ public class VehicleManagerDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				Vehicle vehicle = player.getVehicle();
-				if (vehicle != null) new VehicleDialog(vehicle, player, shoebill, eventManager).show();
+				if (vehicle != null) new VehicleDialog(vehicle, player, shoebill, rootEventManager).show();
+				destroy();
 			}
 		});
 		
@@ -44,7 +45,8 @@ public class VehicleManagerDialog extends AbstractListDialog
 			@Override
 			public void onItemSelect()
 			{
-				new VehicleListDialog(player, shoebill, eventManager, VEHICLE_DISTANCE_COMPARATOR).show();
+				new VehicleListDialog(player, shoebill, rootEventManager, VEHICLE_DISTANCE_COMPARATOR).show();
+				destroy();
 			}
 		});
 		

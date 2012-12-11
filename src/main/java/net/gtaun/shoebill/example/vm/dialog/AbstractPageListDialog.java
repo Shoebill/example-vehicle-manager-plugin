@@ -68,7 +68,7 @@ public class AbstractPageListDialog extends AbstractListDialog
 					@Override
 					public void onItemSelect()
 					{
-						
+						show();
 					}
 				});
 				continue;

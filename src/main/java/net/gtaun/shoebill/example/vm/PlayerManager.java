@@ -76,7 +76,8 @@ public class PlayerManager
 			{
 			case "/vm":
 				new VehicleManagerDialog(player, shoebill, eventManager).show();
-				break;
+				event.setProcessed();
+				return;
 			}
 		}
 	};

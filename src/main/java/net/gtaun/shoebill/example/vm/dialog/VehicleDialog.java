@@ -28,6 +28,7 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				player.setVehicle(vehicle);
+				destroy();
 			}
 		});
 		
@@ -37,6 +38,7 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				vehicle.setLocation(player.getLocation());
+				destroy();
 			}
 		});
 		
@@ -46,6 +48,7 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				VehicleDialog.this.vehicle.repair();
+				destroy();
 			}
 		});
 		
@@ -55,6 +58,7 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				VehicleDialog.this.vehicle.destroy();
+				destroy();
 			}
 		});
 		
@@ -64,6 +68,7 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				VehicleDialog.this.vehicle.respawn();
+				destroy();
 			}
 		});
 		
@@ -73,6 +78,7 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				VehicleDialog.this.vehicle.setHealth(0.0f);
+				destroy();
 			}
 		});
 		
@@ -82,7 +88,8 @@ public class VehicleDialog extends AbstractListDialog
 			public void onItemSelect()
 			{
 				VehicleComponent component = VehicleDialog.this.vehicle.getComponent();
-				new VehicleComponentDialog(component, VehicleDialog.this.player, VehicleDialog.this.shoebill, VehicleDialog.this.eventManager).show();
+				new VehicleComponentDialog(component, player, shoebill, rootEventManager).show();
+				destroy();
 			}
 		});
 		

@@ -35,7 +35,7 @@ public class VehicleComponentDialog extends AbstractListDialog
 				@Override
 				public void onItemSelect()
 				{
-					
+					destroy();
 				}
 			});	
 		}

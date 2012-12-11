@@ -15,8 +15,10 @@ import net.gtaun.util.event.ManagedEventManager;
 public abstract class AbstractDialog
 {
 	protected final Shoebill shoebill;
-	protected final ManagedEventManager eventManager;
+	protected final EventManager rootEventManager;
 	protected final Player player;
+
+	private final ManagedEventManager eventManager;
 	
 	private final Dialog dialog;
 	private final DialogStyle style;
@@ -31,6 +33,7 @@ public abstract class AbstractDialog
 		this.style = style;
 		this.shoebill = shoebill;
 		this.player = player;
+		this.rootEventManager = rootEventManager;
 		this.eventManager = new ManagedEventManager(rootEventManager);
 		
 		SampObjectFactory factory = shoebill.getSampObjectFactory();
@@ -44,6 +47,11 @@ public abstract class AbstractDialog
 	protected void finalize() throws Throwable
 	{
 		super.finalize();
+		destroy();
+	}
+	
+	protected void destroy()
+	{
 		eventManager.cancelAll();
 	}
 	
@@ -84,11 +92,11 @@ public abstract class AbstractDialog
 	
 	protected void onDialogResponse(DialogResponseEvent event)
 	{
-		
+		destroy();
 	}
 	
 	protected void onDialogCancel(DialogCancelEvent event)
 	{
-		
+		destroy();
 	}
 }
