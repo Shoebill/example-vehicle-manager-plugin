@@ -1,7 +1,6 @@
 package net.gtaun.shoebill.example.vm;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -10,16 +9,12 @@ import net.gtaun.shoebill.event.PlayerEventHandler;
 import net.gtaun.shoebill.event.player.PlayerCommandEvent;
 import net.gtaun.shoebill.event.player.PlayerConnectEvent;
 import net.gtaun.shoebill.event.player.PlayerDisconnectEvent;
-import net.gtaun.shoebill.example.vm.dialog.VehicleListDialog;
 import net.gtaun.shoebill.example.vm.dialog.VehicleManagerDialog;
 import net.gtaun.shoebill.object.Player;
-import net.gtaun.shoebill.resource.Plugin;
 import net.gtaun.util.event.EventManager;
-import net.gtaun.util.event.ManagedEventManager;
-import net.gtaun.util.event.EventManager.HandlerEntry;
 import net.gtaun.util.event.EventManager.HandlerPriority;
+import net.gtaun.util.event.ManagedEventManager;
 
-@SuppressWarnings("unused")
 public class PlayerManager
 {
 	private Shoebill shoebill;

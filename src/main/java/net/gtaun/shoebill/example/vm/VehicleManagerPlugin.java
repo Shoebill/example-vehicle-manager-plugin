@@ -1,16 +1,13 @@
 package net.gtaun.shoebill.example.vm;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.gtaun.shoebill.resource.Plugin;
 
 public class VehicleManagerPlugin extends Plugin
 {
-	private static Logger logger;
-	public Logger logger()
-	{
-		return logger;
-	}
+	private static final Logger LOGGER = LoggerFactory.getLogger(VehicleManagerPlugin.class);
 	
 	
 	private PlayerManager playerManager;
@@ -24,11 +21,9 @@ public class VehicleManagerPlugin extends Plugin
 	@Override
 	protected void onEnable() throws Throwable
 	{
-		logger = getLogger();
-		
 		playerManager = new PlayerManager(getShoebill(), getEventManager());
 		
-		logger().info(getDescription().getName() + " Enabled.");
+		LOGGER.info(getDescription().getName() + " Enabled.");
 	}
 	
 	@Override
@@ -36,6 +31,6 @@ public class VehicleManagerPlugin extends Plugin
 	{
 		playerManager.uninitialize();
 		
-		logger().info(getDescription().getName() + " Disabled.");
+		LOGGER.info(getDescription().getName() + " Disabled.");
 	}
 }

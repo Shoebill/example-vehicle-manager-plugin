@@ -47,7 +47,7 @@ public class VehicleDialog extends AbstractListDialog
 			@Override
 			public void onItemSelect()
 			{
-				VehicleDialog.this.vehicle.repair();
+				vehicle.repair();
 				destroy();
 			}
 		});
@@ -57,7 +57,7 @@ public class VehicleDialog extends AbstractListDialog
 			@Override
 			public void onItemSelect()
 			{
-				VehicleDialog.this.vehicle.destroy();
+				vehicle.destroy();
 				destroy();
 			}
 		});
@@ -67,7 +67,7 @@ public class VehicleDialog extends AbstractListDialog
 			@Override
 			public void onItemSelect()
 			{
-				VehicleDialog.this.vehicle.respawn();
+				vehicle.respawn();
 				destroy();
 			}
 		});
@@ -77,7 +77,7 @@ public class VehicleDialog extends AbstractListDialog
 			@Override
 			public void onItemSelect()
 			{
-				VehicleDialog.this.vehicle.setHealth(0.0f);
+				vehicle.setHealth(0.0f);
 				destroy();
 			}
 		});
@@ -87,7 +87,7 @@ public class VehicleDialog extends AbstractListDialog
 			@Override
 			public void onItemSelect()
 			{
-				VehicleComponent component = VehicleDialog.this.vehicle.getComponent();
+				VehicleComponent component = vehicle.getComponent();
 				new VehicleComponentDialog(component, player, shoebill, rootEventManager).show();
 				destroy();
 			}

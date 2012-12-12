@@ -11,7 +11,7 @@ public class VehicleComponentDialog extends AbstractListDialog
 {
 	private VehicleComponent vehicleComponent;
 	
-
+	
 	public VehicleComponentDialog(VehicleComponent component, Player player, Shoebill shoebill, EventManager eventManager)
 	{
 		super(player, shoebill, eventManager);
@@ -29,8 +29,8 @@ public class VehicleComponentDialog extends AbstractListDialog
 		for (VehicleComponentSlot slot : VehicleComponentSlot.values())
 		{
 			int componentId = vehicleComponent.get(slot);
-			String itemName = "Slot " + slot.getValue() + ": " + componentId;
-			dialogListItems.add(new DialogListItem(itemName)
+			String item = "Slot " + slot.getValue() + ": " + componentId;
+			dialogListItems.add(new DialogListItem(item)
 			{
 				@Override
 				public void onItemSelect()

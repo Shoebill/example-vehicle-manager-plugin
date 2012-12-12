@@ -38,7 +38,8 @@ public class VehicleListDialog extends AbstractPageListDialog
 		for (final Vehicle vehicle : sortedVehicles)
 		{			
 			final float distance = playerLoc.distance(vehicle.getLocation());
-			dialogListItems.add(new DialogListItem("ID: " + vehicle.getId() + "		Model: " + vehicle.getModelId() + "	" + "Distance: " + distance + "\n")
+			final String item = "ID: " + vehicle.getId() + "		Model: " + vehicle.getModelId() + "	Distance: " + distance;
+			dialogListItems.add(new DialogListItem(item)
 			{
 				@Override
 				public void onItemSelect()
@@ -49,7 +50,7 @@ public class VehicleListDialog extends AbstractPageListDialog
 			});
 		}
 
-		setCaption("Vehicle List - Page " + getCurrentPage() + "/" + getMaxPage());
+		setCaption("Vehicle List - Page " + (getCurrentPage()+1) + "/" + (getMaxPage()+1));
 		super.show();
 	}
 }
