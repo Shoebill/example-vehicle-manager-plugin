@@ -2,54 +2,26 @@ package net.gtaun.shoebill.example.vm.dialog;
 
 import java.util.Comparator;
 
-import net.gtaun.shoebill.Shoebill;
+import net.gtaun.shoebill.common.dialog.ListDialog;
 import net.gtaun.shoebill.data.Location;
 import net.gtaun.shoebill.object.Player;
 import net.gtaun.shoebill.object.Vehicle;
 import net.gtaun.util.event.EventManager;
 
-public class VehicleManagerDialog extends AbstractListDialog
+public class VehicleManagerDialog
 {
-	public VehicleManagerDialog(Player player, Shoebill shoebill, EventManager eventManager)
+	public static ListDialog create(Player player, EventManager rootEventManager)
 	{
-		super(player, shoebill, eventManager);
-		setCaption("Vehicle Manager");
-	}
-	
-	private final Comparator<Vehicle> VEHICLE_DISTANCE_COMPARATOR = new Comparator<Vehicle>()
-	{
-		@Override
-		public int compare(Vehicle o1, Vehicle o2)
+		Comparator<Vehicle> distanceComparator = (veh1, veh2) ->
 		{
-			Location playerLoc = player.getLocation();
-			return (int) (playerLoc.distance(o1.getLocation()) - playerLoc.distance(o2.getLocation()));
-		}
-	};
-	
-	@Override
-	public void show()
-	{
-		if (player.getVehicle() != null) dialogListItems.add(new DialogListItem("My Vehicle")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				Vehicle vehicle = player.getVehicle();
-				if (vehicle != null) new VehicleDialog(vehicle, player, shoebill, rootEventManager).show();
-				destroy();
-			}
-		});
+			Location loc = player.getLocation();
+			return (int) (loc.distance(veh1.getLocation()) - loc.distance(veh2.getLocation()));
+		};
 		
-		dialogListItems.add(new DialogListItem("List all vehicles, Sort by distance")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				new VehicleListDialog(player, shoebill, rootEventManager, VEHICLE_DISTANCE_COMPARATOR).show();
-				destroy();
-			}
-		});
-		
-		super.show();
+		return ListDialog.create(player, rootEventManager)
+			.caption("Vehicle Manager")
+			.item("My Vehicle", () -> player.isInAnyVehicle(), (d) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()))
+			.item("List all vehicles (Sort by distance)", (d) -> new VehicleListDialog(player, rootEventManager, distanceComparator).show())
+			.build();
 	}
 }

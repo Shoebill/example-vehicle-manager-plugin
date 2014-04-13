@@ -1,98 +1,23 @@
 package net.gtaun.shoebill.example.vm.dialog;
 
-import net.gtaun.shoebill.Shoebill;
+import net.gtaun.shoebill.common.dialog.ListDialog;
 import net.gtaun.shoebill.object.Player;
 import net.gtaun.shoebill.object.Vehicle;
-import net.gtaun.shoebill.object.VehicleComponent;
 import net.gtaun.util.event.EventManager;
 
-public class VehicleDialog extends AbstractListDialog
+public class VehicleDialog
 {
-	private final Vehicle vehicle;
-	
-	
-	public VehicleDialog(Vehicle vehicle, Player player, Shoebill shoebill, EventManager eventManager)
+	public static ListDialog create(Player player, EventManager rootEventManager, Vehicle veh)
 	{
-		super(player, shoebill, eventManager);
-		this.vehicle = vehicle;
-		
-		setCaption("Vehicle - Id: " + vehicle.getId() + " Model: " + vehicle.getModelId());
-	}
-	
-	@Override
-	public void show()
-	{
-		if (player.getVehicle() != vehicle) dialogListItems.add(new DialogListItem("Enter")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				player.setVehicle(vehicle);
-				destroy();
-			}
-		});
-		
-		if (player.getVehicle() != vehicle) dialogListItems.add(new DialogListItem("Fetch")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				vehicle.setLocation(player.getLocation());
-				destroy();
-			}
-		});
-		
-		dialogListItems.add(new DialogListItem("Repair")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				vehicle.repair();
-				destroy();
-			}
-		});
-		
-		if (VehicleDialog.this.vehicle.isStatic() == false) dialogListItems.add(new DialogListItem("Destroy")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				vehicle.destroy();
-				destroy();
-			}
-		});
-		
-		dialogListItems.add(new DialogListItem("Respawn")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				vehicle.respawn();
-				destroy();
-			}
-		});
-		
-		dialogListItems.add(new DialogListItem("Boom")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				vehicle.setHealth(0.0f);
-				destroy();
-			}
-		});
-		
-		dialogListItems.add(new DialogListItem("Component")
-		{
-			@Override
-			public void onItemSelect()
-			{
-				VehicleComponent component = vehicle.getComponent();
-				new VehicleComponentDialog(component, player, shoebill, rootEventManager).show();
-				destroy();
-			}
-		});
-		
-		super.show();
+		return ListDialog.create(player, rootEventManager)
+			.caption(String.format("%s (Id: %d)", veh.getModelName(), veh.getId()))
+			.item("Enter",		() -> player.getVehicle() != veh,	(d) -> player.setVehicle(veh))
+			.item("Fetch",		() -> player.getVehicle() != veh,	(d) -> veh.setLocation(player.getLocation()))
+			.item("Repair",		() -> veh.getHealth() < 100.0f,		(d) -> veh.repair())
+			.item("Destroy",	() -> !veh.isStatic(),				(d) -> veh.destroy())
+			.item("Respawn",	(d) -> veh.respawn())
+			.item("Boom",		(d) -> veh.setHealth(0.0f))
+			.item("Components", (d) -> new VehicleComponentDialog(player, rootEventManager, veh).show())
+			.build();
 	}
 }

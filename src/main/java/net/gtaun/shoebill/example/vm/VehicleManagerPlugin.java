@@ -21,7 +21,7 @@ public class VehicleManagerPlugin extends Plugin
 	@Override
 	protected void onEnable() throws Throwable
 	{
-		playerManager = new PlayerManager(getShoebill(), getEventManager());
+		playerManager = new PlayerManager(getEventManager());
 		
 		LOGGER.info(getDescription().getName() + " Enabled.");
 	}
