@@ -11,13 +11,13 @@ public class VehicleDialog
 	{
 		return ListDialog.create(player, rootEventManager)
 			.caption(String.format("%s (Id: %d)", veh.getModelName(), veh.getId()))
-			.item("Enter",		() -> player.getVehicle() != veh,	(d) -> player.setVehicle(veh))
-			.item("Fetch",		() -> player.getVehicle() != veh,	(d) -> veh.setLocation(player.getLocation()))
-			.item("Repair",		() -> veh.getHealth() < 100.0f,		(d) -> veh.repair())
-			.item("Destroy",	() -> !veh.isStatic(),				(d) -> veh.destroy())
-			.item("Respawn",	(d) -> veh.respawn())
-			.item("Boom",		(d) -> veh.setHealth(0.0f))
-			.item("Components", (d) -> new VehicleComponentDialog(player, rootEventManager, veh).show())
+			.item("Enter",		() -> player.getVehicle() != veh,	(i) -> player.setVehicle(veh))
+			.item("Fetch",		() -> player.getVehicle() != veh,	(i) -> veh.setLocation(player.getLocation()))
+			.item("Repair",		() -> veh.getHealth() < 100.0f,		(i) -> veh.repair())
+			.item("Destroy",	() -> !veh.isStatic(),				(i) -> veh.destroy())
+			.item("Respawn",	(i) -> veh.respawn())
+			.item("Boom",		(i) -> veh.setHealth(0.0f))
+			.item("Components", (i) -> new VehicleComponentDialog(player, rootEventManager, veh).show())
 			.build();
 	}
 }

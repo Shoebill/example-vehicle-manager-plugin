@@ -20,8 +20,8 @@ public class VehicleManagerDialog
 		
 		return ListDialog.create(player, rootEventManager)
 			.caption("Vehicle Manager")
-			.item("My Vehicle", () -> player.isInAnyVehicle(), (d) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()))
-			.item("List all vehicles (Sort by distance)", (d) -> new VehicleListDialog(player, rootEventManager, distanceComparator).show())
+			.item("My Vehicle", () -> player.isInAnyVehicle(), (i) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()))
+			.item("List all vehicles (Sort by distance)", (i) -> new VehicleListDialog(player, rootEventManager, distanceComparator).show())
 			.build();
 	}
 }

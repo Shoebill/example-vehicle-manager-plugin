@@ -18,7 +18,10 @@ public class VehicleComponentDialog extends ListDialog
 		return ListDialog.create(player, rootEventManager)
 			.caption(String.format("Vehicle Component - %s (Id: %d)", veh.getModelName(), veh.getId()))
 			.execute((b) -> Arrays.stream(VehicleComponentSlot.values()).forEach((slot) ->
-				b.item(String.format("Slot %s: %s", slot.name(), VehicleComponentModel.getName(veh.getComponent().get(slot))))))
+			{
+				// XXX: Buggy Eclipse JDT Compiler
+				((AbstractListDialogBuilder<?, ?>) b).item(String.format("Slot %s: %s", slot.name(), VehicleComponentModel.getName(veh.getComponent().get(slot))));
+			}))
 			.build();
 	}
 	
