@@ -17,10 +17,10 @@ public class VehicleManagerDialog
 			Location loc = player.getLocation();
 			return (int) (loc.distance(veh1.getLocation()) - loc.distance(veh2.getLocation()));
 		};
-		
+
 		return ListDialog.create(player, rootEventManager)
 			.caption("Vehicle Manager")
-			.item("My Vehicle", () -> player.isInAnyVehicle(), (i) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()))
+			.item("My Vehicle", () -> player.isInAnyVehicle(), (i) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()).show())
 			.item("List all vehicles (Sort by distance)", (i) -> new VehicleListDialog(player, rootEventManager, distanceComparator).show())
 			.build();
 	}
