@@ -10,7 +10,7 @@ public class VehicleManagerPlugin extends Plugin
 	private static final Logger LOGGER = LoggerFactory.getLogger(VehicleManagerPlugin.class);
 	
 	
-	private PlayerManager playerManager;
+	private PlayerController playerController;
 	
 	
 	public VehicleManagerPlugin()
@@ -21,7 +21,7 @@ public class VehicleManagerPlugin extends Plugin
 	@Override
 	protected void onEnable() throws Throwable
 	{
-		playerManager = new PlayerManager(getEventManager());
+		playerController = new PlayerController(getEventManager());
 		
 		LOGGER.info(getDescription().getName() + " Enabled.");
 	}
@@ -29,7 +29,7 @@ public class VehicleManagerPlugin extends Plugin
 	@Override
 	protected void onDisable() throws Throwable
 	{
-		playerManager.uninitialize();
+		playerController.uninitialize();
 		
 		LOGGER.info(getDescription().getName() + " Disabled.");
 	}
