@@ -8,20 +8,19 @@ import net.gtaun.shoebill.object.Player;
 import net.gtaun.shoebill.object.Vehicle;
 import net.gtaun.util.event.EventManager;
 
-public class VehicleManagerDialog
-{
-	public static ListDialog create(Player player, EventManager rootEventManager)
-	{
-		Comparator<Vehicle> distanceComparator = (veh1, veh2) ->
-		{
-			Location loc = player.getLocation();
-			return (int) (loc.distance(veh1.getLocation()) - loc.distance(veh2.getLocation()));
-		};
+public class VehicleManagerDialog {
 
-		return ListDialog.create(player, rootEventManager)
-			.caption("Vehicle Manager")
-			.item("My Vehicle", () -> player.isInAnyVehicle(), (i) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()).show())
-			.item("List all vehicles (Sort by distance)", (i) -> new VehicleListDialog(player, rootEventManager, distanceComparator).show())
-			.build();
-	}
+    public static ListDialog create(Player player, EventManager rootEventManager) {
+        Comparator<Vehicle> distanceComparator = (veh1, veh2) ->
+        {
+            Location loc = player.getLocation();
+            return (int) (loc.distance(veh1.getLocation()) - loc.distance(veh2.getLocation()));
+        };
+
+        return ListDialog.create(player, rootEventManager)
+                .caption("Vehicle Manager")
+                .item("My Vehicle", () -> player.isInAnyVehicle(), (i) -> VehicleDialog.create(player, rootEventManager, player.getVehicle()).show())
+                .item("List all vehicles (Sort by distance)", (i) -> new VehicleListDialog(player, rootEventManager, distanceComparator).show())
+                .build();
+    }
 }
